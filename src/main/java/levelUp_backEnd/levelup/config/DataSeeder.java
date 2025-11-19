@@ -8,9 +8,18 @@ import levelUp_backEnd.levelup.model.Product;
 import levelUp_backEnd.levelup.repository.ProductRepository;
 
 @Configuration
+/**
+ * Inicializa la base de datos con productos de ejemplo.
+ * Se ejecuta al inicio de la aplicación y sólo si la tabla está vacía.
+ */
 public class DataSeeder {
 
     @Bean
+    /**
+     * Runner de arranque que inserta datos semilla en la tabla de productos.
+     * @param repo repositorio JPA de productos
+     * @return tarea de inicialización
+     */
     CommandLineRunner initDatabase(ProductRepository repo) {
         return args -> {
             if (repo.count() == 0) {

@@ -31,12 +31,20 @@ import levelUp_backEnd.levelup.service.ProductService;
 @RequestMapping("/api/v1/products")
 @CrossOrigin(origins = "http://localhost:5173")
 @Tag(name = "Products", description = "Operaciones CRUD de productos")
+/**
+ * Controlador REST para la gestión del catálogo de productos.
+ * Expone endpoints CRUD bajo la ruta base {@code /api/v1/products}.
+ */
 public class ProductController {
 
     @Autowired
     private ProductService productService;
 
     @GetMapping
+    /**
+     * Lista los productos disponibles.
+     * @return 200 con lista de productos o 204 si está vacía
+     */
     @Operation(summary = "Listar productos", description = "Obtiene la lista de productos disponibles")
     @ApiResponses({
         @ApiResponse(responseCode = "200", description = "Lista recuperada exitosamente",
@@ -53,6 +61,11 @@ public class ProductController {
     }
 
     @PostMapping
+    /**
+     * Crea un nuevo producto.
+     * @param product datos del producto a crear
+     * @return 201 con el producto creado
+     */
     @Operation(summary = "Crear producto", description = "Crea un nuevo producto")
     @ApiResponses({
         @ApiResponse(responseCode = "201", description = "Producto creado",
@@ -66,6 +79,11 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
+    /**
+     * Obtiene un producto por su ID.
+     * @param id identificador del producto
+     * @return 200 con el producto o 404 si no existe
+     */
     @Operation(summary = "Obtener producto por ID", description = "Devuelve un producto dado su ID")
     @ApiResponses({
         @ApiResponse(responseCode = "200", description = "Producto encontrado",
@@ -83,6 +101,12 @@ public class ProductController {
     }
 
     @PutMapping("/{id}")
+    /**
+     * Actualiza un producto existente.
+     * @param id identificador del producto
+     * @param product nuevos datos a aplicar
+     * @return 200 con el producto actualizado o 404 si no existe
+     */
     @Operation(summary = "Actualizar producto", description = "Actualiza un producto existente")
     @ApiResponses({
         @ApiResponse(responseCode = "200", description = "Producto actualizado",
@@ -107,6 +131,11 @@ public class ProductController {
     }
 
     @DeleteMapping("/{id}")
+    /**
+     * Elimina un producto por su ID.
+     * @param id identificador del producto
+     * @return 204 si se elimina o 404 si no existe
+     */
     @Operation(summary = "Eliminar producto", description = "Elimina un producto por ID")
     @ApiResponses({
         @ApiResponse(responseCode = "204", description = "Eliminado"),
@@ -122,6 +151,12 @@ public class ProductController {
     }
 
     @PutMapping("/descontar/{id}/{cantidad}")
+    /**
+     * Descuenta stock de un producto.
+     * @param id identificador del producto
+     * @param cantidad unidades a descontar del stock
+     * @return 200 si se actualiza, 400 si stock insuficiente, 500 en error
+     */
     public ResponseEntity<String> descontar(@PathVariable Long id, @PathVariable int cantidad) {
         try {
             productService.descontarStock(id, cantidad);
