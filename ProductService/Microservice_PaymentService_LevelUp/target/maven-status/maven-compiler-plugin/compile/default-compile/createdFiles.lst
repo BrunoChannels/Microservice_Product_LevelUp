@@ -1,0 +1,6 @@
+com\levelup\product\config\DataLoader.class
+com\levelup\product\ProductServiceApplication.class
+com\levelup\product\web\ProductController.class
+com\levelup\product\repo\ProductRepository.class
+levelUp_backEnd\levelup\LevelupBackendApplication.class
+com\levelup\product\model\Product.class
